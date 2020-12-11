@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<project>
+  <fileVersion>2</fileVersion>
+  <fileChecksum>2122827429</fileChecksum>
+  <configuration>
+    <name>Debug</name>
+    <outputs>
+      <file>$TOOLKIT_DIR$\inc\c\ycheck.h</file>
+      <file>$PROJ_DIR$\..\..\..\..\pbc\pbc_system_tick\depend\snail_data_types.h</file>
+      <file>$PROJ_DIR$\..\..\..\..\pbc\pbc_system_tick\pbc_system_tick.c</file>
+      <file>$PROJ_DIR$\Debug\Obj\main.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\mbus_link_hc32l136k8ta.pbd</file>
+      <file>$PROJ_DIR$\..\..\depend\bsp_mbus_link.c</file>
+      <file>$PROJ_DIR$\..\..\solid_mubs_link.h</file>
+      <file>$PROJ_DIR$\lib_hc32l13x\startup_hc32l13x.s</file>
+      <file>$PROJ_DIR$\lib_hc32l13x\common\interrupts_hc32l13x.c</file>
+      <file>$PROJ_DIR$\..\..\depend\bsp_mbus_link_hc32l136k8ta.h</file>
+      <file>$PROJ_DIR$\..\..\..\..\pbc\pbc_system_tick\pbc_system_tick.h</file>
+      <file>$PROJ_DIR$\..\app\snail_data_types.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\main.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\bsp_mbus_link.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\mde_mbus_link.o</file>
+      <file>$PROJ_DIR$\..\..\depend\snail_data_types.h</file>
+      <file>$TOOLKIT_DIR$\inc\c\intrinsics.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\bsp_system_tick.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\pbc_system_tick.pbi</file>
+      <file>$PROJ_DIR$\..\..\depend\bsp_mbus_link.h</file>
+      <file>$PROJ_DIR$\..\..\mde_mbus_link.c</file>
+      <file>$PROJ_DIR$\..\..\mde_mbus_link.h</file>
+      <file>$PROJ_DIR$\Debug\Exe\mbus_link_hc32l136k8ta.out</file>
+      <file>$PROJ_DIR$\..\..\..\..\pbc\pbc_system_tick\depend\bsp_system_tick.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\bsp_mbus_link.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\interrupts_hc32l13x.pbi</file>
+      <file>$PROJ_DIR$\lib_hc32l13x\common\system_hc32l13x.c</file>
+      <file>$PROJ_DIR$\..\..\..\..\pbc\pbc_system_tick\depend\bsp_system_tick.c</file>
+      <file>$PROJ_DIR$\Debug\Obj\mde_mbus_link.pbi</file>
+      <file>$PROJ_DIR$\..\app\main.c</file>
+      <file>$PROJ_DIR$\..\app\app_cfg.h</file>
+      <file>$TOOLKIT_DIR$\inc\c\xencoding_limits.h</file>
+      <file>$TOOLKIT_DIR$\inc\c\ystdio.h</file>
+      <file>$TOOLKIT_DIR$\inc\c\DLib_Defaults.h</file>
+      <file>$TOOLKIT_DIR$\inc\c\yvals.h</file>
+      <file>$TOOLKIT_DIR$\CMSIS\Include\core_cmInstr.h</file>
+      <file>$TOOLKIT_DIR$\inc\c\assert.h</file>
+      <file>$TOOLKIT_DIR$\inc\c\DLib_Config_Normal.h</file>
+      <file>$TOOLKIT_DIR$\inc\c\stddef.h</file>
+      <file>$TOOLKIT_DIR$\inc\c\DLib_Product_string.h</file>
+      <file>$TOOLKIT_DIR$\inc\c\string.h</file>
+      <file>$TOOLKIT_DIR$\inc\c\cmsis_iar.h</file>
+      <file>$PROJ_DIR$\..\..\..\..\pbc\pbc_system_tick\depend\bsp_system_tick_hc32l136k8ta.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\system_hc32l13x.pbi</file>
+      <file>$PROJ_DIR$\lib_hc32l13x\common\base_types.h</file>
+      <file>$PROJ_DIR$\lib_hc32l13x\driver\inc\sysctrl.h</file>
+      <file>$PROJ_DIR$\lib_hc32l13x\driver\inc\ddl.h</file>
+      <file>$TOOLKIT_DIR$\CMSIS\Include\core_cm0plus.h</file>
+      <file>$PROJ_DIR$\lib_hc32l13x\common\interrupts_hc32l13x.h</file>
+      <file>$TOOLKIT_DIR$\inc\c\stdio.h</file>
+      <file>$TOOLKIT_DIR$\inc\c\DLib_Product.h</file>
+      <file>$TOOLKIT_DIR$\inc\c\DLib_Threads.h</file>
+      <file>$PROJ_DIR$\lib_hc32l13x\common\hc32l13x.h</file>
+      <file>$TOOLKIT_DIR$\CMSIS\Include\core_cmFunc.h</file>
+      <file>$TOOLKIT_DIR$\inc\c\ysizet.h</file>
+      <file>$PROJ_DIR$\lib_hc32l13x\common\system_hc32l13x.h</file>
+      <file>$PROJ_DIR$\lib_hc32l13x\common\board_stkhc32l13x.h</file>
+      <file>$PROJ_DIR$\chip_select.h</file>
+      <file>$TOOLKIT_DIR$\inc\c\stdint.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\system_hc32l13x.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\startup_hc32l13x.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\pbc_system_tick.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\interrupts_hc32l13x.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\bsp_system_tick.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\main.__cstat.et</file>
+      <file>$PROJ_DIR$\Debug\Obj\system_hc32l13x.__cstat.et</file>
+      <file>$PROJ_DIR$\Debug\Obj\bsp_system_tick.__cstat.et</file>
+      <file>$PROJ_DIR$\Debug\Obj\bsp_mbus_link.__cstat.et</file>
+      <file>$PROJ_DIR$\Debug\Obj\interrupts_hc32l13x.__cstat.et</file>
+      <file>$PROJ_DIR$\Debug\Obj\pbc_system_tick.__cstat.et</file>
+      <file>$PROJ_DIR$\Debug\Obj\mde_mbus_link.__cstat.et</file>
+      <file>$PROJ_DIR$\..\..\solid_mbus_link.h</file>
+      <file>$TOOLKIT_DIR$\config\linker\HDSC\HC32L136.icf</file>
+      <file>$TOOLKIT_DIR$\lib\rt6M_tl.a</file>
+      <file>$TOOLKIT_DIR$\lib\m6M_tl.a</file>
+      <file>$TOOLKIT_DIR$\lib\dl6M_tln.a</file>
+      <file>$TOOLKIT_DIR$\lib\shb_l.a</file>
+      <file>$PROJ_DIR$\Debug\List\mbus_link_hc32l136k8ta.map</file>
+      <file>$PROJ_DIR$\lib_hc32l13x\hc32l13x.icf</file>
+    </outputs>
+    <file>
+      <name>$PROJ_DIR$\..\..\..\..\pbc\pbc_system_tick\pbc_system_tick.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 61</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 18</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 69</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 23 1 10</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 10 1 23</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\depend\bsp_mbus_link.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 13</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 24</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 67</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 57 9 15 21 52 47 58 0 34 33 37 50 31 51 35 41 16 53 48 46 44 49 54 32 40 39 38 36 56 55 45</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 52 54 16 53 34 58 9 21 47 51 40 0 15 48 41 46 44 45 57 35 33 31 37 50 56 55 49 38 36 32 39</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\lib_hc32l13x\startup_hc32l13x.s</name>
+      <outputs>
+        <tool>
+          <name>AARM</name>
+          <file> 60</file>
+        </tool>
+      </outputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\lib_hc32l13x\common\interrupts_hc32l13x.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 62</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 25</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 68</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 46 44 49 0 34 33 37 50 31 51 54 32 40 39 38 58 36 56 52 47 35 41 16 53 55 45 48</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 47 50 34 52 58 0 33 44 45 40 54 31 37 16 48 56 55 49 38 36 32 51 39 35 41 46 53</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\mde_mbus_link.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 14</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 28</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 70</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 10 1 19 21 71</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 21 71 19 1 10</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\Debug\Exe\mbus_link_hc32l136k8ta.out</name>
+      <outputs>
+        <tool>
+          <name>ILINK</name>
+          <file> 77</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ILINK</name>
+          <file> 78 13 17 62 3 14 61 60 59 76 73 74 75</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\lib_hc32l13x\common\system_hc32l13x.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 59</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 43</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 65</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 44 49 0 34 33 37 50 31 51 54 32 40 39 38 58 36 52 47 35 41 16 53 55</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 34 31 51 58 40 0 32 33 53 41 52 49 38 36 54 37 50 39 47 44 55 35 16</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\..\..\pbc\pbc_system_tick\depend\bsp_system_tick.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 17</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 63</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 66</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 57 1 45 46 44 49 0 34 33 37 50 31 51 54 32 40 39 38 58 36 56 52 47 35 41 16 53 55 48 42</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 0 34 56 36 51 39 16 48 49 58 45 55 38 32 54 1 42 46 44 52 40 33 31 37 50 47 35 41 57 53</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\app\main.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 3</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 12</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 64</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 30 11 10 21</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 21 11 30 10</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>[ROOT_NODE]</name>
+      <outputs>
+        <tool>
+          <name>ILINK</name>
+          <file> 22 77</file>
+        </tool>
+      </outputs>
+    </file>
+  </configuration>
+  <configuration>
+    <name>Release</name>
+    <outputs/>
+    <forcedrebuild>
+      <name>[MULTI_TOOL]</name>
+      <tool>ILINK</tool>
+    </forcedrebuild>
+  </configuration>
+</project>
+
+

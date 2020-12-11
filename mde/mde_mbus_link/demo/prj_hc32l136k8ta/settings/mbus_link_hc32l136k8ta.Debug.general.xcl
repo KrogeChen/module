@@ -1,0 +1,13 @@
+"C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.5\arm\bin\armproc.dll" 
+
+"C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.5\arm\bin\armjlink2.dll" 
+
+"C:\Users\kroge\krogeWork\github\module\mde\mde_mbus_link\demo\prj_hc32l136k8ta\Debug\Exe\mbus_link_hc32l136k8ta.out" 
+
+--plugin "C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.5\arm\bin\armbat.dll" 
+
+--flash_loader "C:\Users\kroge\krogeWork\github\module\mde\mde_mbus_link\demo\prj_hc32l136k8ta\flashloader\HC32L13X.board" 
+
+
+
+
