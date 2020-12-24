@@ -8,6 +8,14 @@
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 #define taskTotal      8   
 //------------------------------------------------------------------------------
+typedef struct
+{
+    sdt_bool       taskRun;         //运行标志
+    sdt_int16u     timer;           //任务时间计数
+    sdt_int16u     timerPeriod;     //任务周期
+    pTaskFun_def   taskHook;          //任务函数指针
+}taskSCH_def;
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 taskSCH_def taskTable[taskTotal];
 static sdt_bool system_cfged = sdt_false;
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -187,8 +195,8 @@ void pbc_timerClockRun_task(timerClock_def* in_timer)
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 void pbc_timerMillRun_task(timerClock_def* in_timer)
 {
-    in_timer->timStatusBits &= ~timStatusBits_typeMask;
-    in_timer->timStatusBits |= timStatusBits_typeMillsecond;
+    in_timer->timStatusBits &= ~timStatusBits_typeMask;  //0 is millsecond type
+    //in_timer->timStatusBits |= timStatusBits_typeMillsecond;
     pbc_timerClockRun_task(in_timer);
 }
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
