@@ -1,0 +1,458 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<project>
+  <fileVersion>2</fileVersion>
+  <fileChecksum>2453309323</fileChecksum>
+  <configuration>
+    <name>Debug</name>
+    <outputs>
+      <file>$PROJ_DIR$\lib_n32g45x\firmware\n32g45x_std_periph_driver\inc\n32g45x_bkp.h</file>
+      <file>$PROJ_DIR$\lib_n32g45x\firmware\n32g45x_std_periph_driver\inc\n32g45x_dbg.h</file>
+      <file>$PROJ_DIR$\lib_n32g45x\firmware\n32g45x_std_periph_driver\inc\n32g45x_can.h</file>
+      <file>$PROJ_DIR$\lib_n32g45x\firmware\n32g45x_std_periph_driver\inc\n32g45x_dvp.h</file>
+      <file>$PROJ_DIR$\lib_n32g45x\firmware\n32g45x_std_periph_driver\inc\n32g45x_opamp.h</file>
+      <file>$PROJ_DIR$\lib_n32g45x\firmware\n32g45x_std_periph_driver\inc\n32g45x_adc.h</file>
+      <file>$PROJ_DIR$\lib_n32g45x\firmware\n32g45x_std_periph_driver\inc\n32g45x_xfmc.h</file>
+      <file>$PROJ_DIR$\lib_n32g45x\firmware\n32g45x_std_periph_driver\inc\n32g45x_tim.h</file>
+      <file>$PROJ_DIR$\lib_n32g45x\firmware\n32g45x_std_periph_driver\inc\n32g45x_crc.h</file>
+      <file>$TOOLKIT_DIR$\inc\c\DLib_Product.h</file>
+      <file>$PROJ_DIR$\lib_n32g45x\firmware\CMSIS\device\system_n32g45x.h</file>
+      <file>$PROJ_DIR$\lib_n32g45x\firmware\n32g45x_std_periph_driver\inc\n32g45x_dac.h</file>
+      <file>$PROJ_DIR$\lib_n32g45x\firmware\n32g45x_std_periph_driver\inc\n32g45x_dma.h</file>
+      <file>$PROJ_DIR$\lib_n32g45x\firmware\n32g45x_std_periph_driver\inc\n32g45x_usart.h</file>
+      <file>$PROJ_DIR$\lib_n32g45x\firmware\n32g45x_std_periph_driver\inc\n32g45x_tsc.h</file>
+      <file>$PROJ_DIR$\lib_n32g45x\firmware\n32g45x_std_periph_driver\inc\misc.h</file>
+      <file>$TOOLKIT_DIR$\inc\c\DLib_Defaults.h</file>
+      <file>$TOOLKIT_DIR$\inc\c\DLib_Config_Normal.h</file>
+      <file>$PROJ_DIR$\lib_n32g45x\firmware\n32g45x_std_periph_driver\inc\n32g45x_sdio.h</file>
+      <file>$PROJ_DIR$\lib_n32g45x\firmware\n32g45x_std_periph_driver\inc\n32g45x_exti.h</file>
+      <file>$TOOLKIT_DIR$\inc\c\yvals.h</file>
+      <file>$PROJ_DIR$\lib_n32g45x\firmware\n32g45x_std_periph_driver\inc\n32g45x_pwr.h</file>
+      <file>$PROJ_DIR$\lib_n32g45x\firmware\n32g45x_std_periph_driver\inc\n32g45x_gpio.h</file>
+      <file>$TOOLKIT_DIR$\inc\c\DLib_Threads.h</file>
+      <file>$PROJ_DIR$\lib_n32g45x\firmware\n32g45x_std_periph_driver\inc\n32g45x_flash.h</file>
+      <file>$PROJ_DIR$\lib_n32g45x\firmware\CMSIS\device\n32g45x_conf.h</file>
+      <file>$PROJ_DIR$\lib_n32g45x\firmware\n32g45x_std_periph_driver\inc\n32g45x_wwdg.h</file>
+      <file>$PROJ_DIR$\lib_n32g45x\firmware\n32g45x_std_periph_driver\inc\n32g45x_spi.h</file>
+      <file>$PROJ_DIR$\lib_n32g45x\firmware\n32g45x_std_periph_driver\inc\n32g45x_rcc.h</file>
+      <file>$PROJ_DIR$\lib_n32g45x\firmware\n32g45x_std_periph_driver\inc\n32g45x_rtc.h</file>
+      <file>$TOOLKIT_DIR$\inc\c\stdbool.h</file>
+      <file>$PROJ_DIR$\lib_n32g45x\firmware\n32g45x_std_periph_driver\inc\n32g45x_iwdg.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\mde_log_message.__cstat.et</file>
+      <file>$PROJ_DIR$\Debug\Obj\bsp_log_message.__cstat.et</file>
+      <file>$PROJ_DIR$\..\..\depend\snail_data_types.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\main.__cstat.et</file>
+      <file>$PROJ_DIR$\Debug\Obj\misc.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g45x_tim.__cstat.et</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g45x_flash.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g45x_flash.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\system_n32g45x.__cstat.et</file>
+      <file>$PROJ_DIR$\Debug\List\log_message_n32g455rcl6.map</file>
+      <file>$PROJ_DIR$\Debug\Obj\misc.__cstat.et</file>
+      <file>$PROJ_DIR$\Debug\Obj\misc.o</file>
+      <file>$TOOLKIT_DIR$\lib\rt7M_tl.a</file>
+      <file>$TOOLKIT_DIR$\lib\dl7M_tln.a</file>
+      <file>$TOOLKIT_DIR$\lib\shb_l.a</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g45x_gpio.__cstat.et</file>
+      <file>$PROJ_DIR$\Debug\Obj\pbc_system_tick.__cstat.et</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g45x_tim.pbi</file>
+      <file>$TOOLKIT_DIR$\config\linker\Nations\N32G45x\N32G455xC.icf</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g45x_usart.__cstat.et</file>
+      <file>$PROJ_DIR$\Debug\Obj\bsp_system_tick.__cstat.et</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g45x_rcc.__cstat.et</file>
+      <file>$PROJ_DIR$\Debug\Obj\startup_n32g45x_EWARM.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\mde_log_message.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\mde_log_message.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g45x_tim.o</file>
+      <file>$TOOLKIT_DIR$\lib\m7M_tls.a</file>
+      <file>$PROJ_DIR$\Debug\Obj\bsp_log_message.o</file>
+      <file>$PROJ_DIR$\..\..\solid_log_message.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\system_n32g45x.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\system_n32g45x.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\bsp_log_message.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g45x_flash.__cstat.et</file>
+      <file>$PROJ_DIR$\..\..\..\..\pbc\pbc_system_tick\depend\bsp_system_tick_n32g455rcl7.h</file>
+      <file>$PROJ_DIR$\lib_n32g45x\firmware\n32g45x_std_periph_driver\inc\n32g45x_comp.h</file>
+      <file>$PROJ_DIR$\lib_n32g45x\firmware\CMSIS\core\core_cm4.h</file>
+      <file>$TOOLKIT_DIR$\inc\c\xencoding_limits.h</file>
+      <file>$PROJ_DIR$\lib_n32g45x\firmware\CMSIS\core\cmsis_compiler.h</file>
+      <file>$PROJ_DIR$\..\app\app_cfg.h</file>
+      <file>$PROJ_DIR$\..\app\main.c</file>
+      <file>$PROJ_DIR$\lib_n32g45x\firmware\n32g45x_std_periph_driver\src\misc.c</file>
+      <file>$PROJ_DIR$\lib_n32g45x\firmware\CMSIS\device\startup\startup_n32g45x_EWARM.s</file>
+      <file>$PROJ_DIR$\..\..\mde_log_message.c</file>
+      <file>$PROJ_DIR$\lib_n32g45x\firmware\n32g45x_std_periph_driver\src\n32g45x_rcc.c</file>
+      <file>$PROJ_DIR$\..\..\..\..\pbc\pbc_system_tick\depend\bsp_system_tick.c</file>
+      <file>$PROJ_DIR$\..\..\mde_log_message.h</file>
+      <file>$PROJ_DIR$\lib_n32g45x\firmware\n32g45x_std_periph_driver\src\n32g45x_tim.c</file>
+      <file>$PROJ_DIR$\lib_n32g45x\firmware\n32g45x_std_periph_driver\src\n32g45x_flash.c</file>
+      <file>$PROJ_DIR$\lib_n32g45x\firmware\n32g45x_std_periph_driver\src\n32g45x_gpio.c</file>
+      <file>$PROJ_DIR$\lib_n32g45x\firmware\n32g45x_std_periph_driver\src\n32g45x_usart.c</file>
+      <file>$PROJ_DIR$\..\..\..\..\pbc\pbc_system_tick\depend\bsp_system_tick.h</file>
+      <file>$PROJ_DIR$\..\..\depend\bsp_log_message.h</file>
+      <file>$PROJ_DIR$\..\..\..\..\pbc\pbc_system_tick\pbc_system_tick.c</file>
+      <file>$PROJ_DIR$\..\..\..\..\pbc\pbc_system_tick\pbc_system_tick.h</file>
+      <file>$PROJ_DIR$\lib_n32g45x\firmware\CMSIS\core\mpu_armv7.h</file>
+      <file>$PROJ_DIR$\..\..\depend\bsp_log_message_n32g455rcl7.h</file>
+      <file>$PROJ_DIR$\lib_n32g45x\firmware\CMSIS\device\system_n32g45x.c</file>
+      <file>$PROJ_DIR$\..\..\depend\bsp_log_message.c</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g45x_rcc.pbi</file>
+      <file>$PROJ_DIR$\Debug\Exe\log_message_n32g455rcl6.out</file>
+      <file>$TOOLKIT_DIR$\inc\c\ycheck.h</file>
+      <file>$TOOLKIT_DIR$\inc\c\stdint.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g45x_rcc.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g45x_usart.o</file>
+      <file>$PROJ_DIR$\lib_n32g45x\firmware\CMSIS\device\n32g45x.h</file>
+      <file>$PROJ_DIR$\lib_n32g45x\firmware\n32g45x_std_periph_driver\inc\n32g45x_i2c.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g45x_usart.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\main.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\bsp_system_tick.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\main.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\bsp_system_tick.pbi</file>
+      <file>$PROJ_DIR$\chip_select.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g45x_gpio.pbi</file>
+      <file>$TOOLKIT_DIR$\inc\c\intrinsics.h</file>
+      <file>$PROJ_DIR$\lib_n32g45x\firmware\CMSIS\core\cmsis_iccarm.h</file>
+      <file>$PROJ_DIR$\lib_n32g45x\firmware\CMSIS\core\cmsis_version.h</file>
+      <file>$PROJ_DIR$\lib_n32g45x\firmware\n32g45x_std_periph_driver\inc\n32g45x_eth.h</file>
+      <file>$PROJ_DIR$\lib_n32g45x\firmware\n32g45x_std_periph_driver\inc\n32g45x_qspi.h</file>
+      <file>$PROJ_DIR$\..\..\..\..\pbc\pbc_system_tick\depend\snail_data_types.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\pbc_system_tick.o</file>
+      <file>$PROJ_DIR$\..\app\snail_data_types.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\pbc_system_tick.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\log_message_n32g455rcl6.pbd</file>
+      <file>$PROJ_DIR$\Debug\Obj\n32g45x_gpio.o</file>
+    </outputs>
+    <file>
+      <name>[ROOT_NODE]</name>
+      <outputs>
+        <tool>
+          <name>ILINK</name>
+          <file> 91 41</file>
+        </tool>
+      </outputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\app\main.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 101</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 99</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 35</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 112 77 85 70</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 70 112 85 77</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\lib_n32g45x\firmware\n32g45x_std_periph_driver\src\misc.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 36</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 43</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 42</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 15 96 67 93 92 20 16 17 9 68 23 107 69 106 105 86 10 30 25 5 0 2 66 8 11 1 12 3 108 19 24 22 97 31 4 21 109 28 29 18 27 7 13 26 6 14</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\lib_n32g45x\firmware\CMSIS\device\startup\startup_n32g45x_EWARM.s</name>
+      <outputs>
+        <tool>
+          <name>AARM</name>
+          <file> 54</file>
+        </tool>
+      </outputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\mde_log_message.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 55</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 56</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 32</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 83 60 110 85</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 85 110 83 60</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\lib_n32g45x\firmware\n32g45x_std_periph_driver\src\n32g45x_rcc.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 90</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 94</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 53</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 28 96 67 93 92 20 16 17 9 68 23 107 69 106 105 86 10 30 25 5 0 2 66 8 11 1 12 3 108 19 24 22 97 31 4 21 109 29 18 27 7 13 26 6 14 15</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\..\..\pbc\pbc_system_tick\depend\bsp_system_tick.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 102</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 100</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 52</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 103 110 65 96 67 93 92 20 16 17 9 68 23 107 69 106 105 86 10 30 25 5 0 2 66 8 11 1 12 3 108 19 24 22 97 31 4 21 109 28 29 18 27 7 13 26 6 14 15</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\lib_n32g45x\firmware\n32g45x_std_periph_driver\src\n32g45x_tim.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 49</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 57</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 37</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 7 96 67 93 92 20 16 17 9 68 23 107 69 106 105 86 10 30 25 5 0 2 66 8 11 1 12 3 108 19 24 22 97 31 4 21 109 28 29 18 27 13 26 6 14 15</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\lib_n32g45x\firmware\n32g45x_std_periph_driver\src\n32g45x_flash.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 39</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 38</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 64</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 24 96 67 93 92 20 16 17 9 68 23 107 69 106 105 86 10 30 25 5 0 2 66 8 11 1 12 3 108 19 22 97 31 4 21 109 28 29 18 27 7 13 26 6 14 15</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\lib_n32g45x\firmware\n32g45x_std_periph_driver\src\n32g45x_gpio.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 104</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 115</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 47</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 22 96 67 93 92 20 16 17 9 68 23 107 69 106 105 86 10 30 25 5 0 2 66 8 11 1 12 3 108 19 24 97 31 4 21 109 28 29 18 27 7 13 26 6 14 15</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\lib_n32g45x\firmware\n32g45x_std_periph_driver\src\n32g45x_usart.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 98</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 95</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 51</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 13 96 67 93 92 20 16 17 9 68 23 107 69 106 105 86 10 30 25 5 0 2 66 8 11 1 12 3 108 19 24 22 97 31 4 21 109 28 29 18 27 7 26 6 14 15</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\..\..\pbc\pbc_system_tick\pbc_system_tick.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 113</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 111</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 48</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 82 110 85</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\lib_n32g45x\firmware\CMSIS\device\system_n32g45x.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 62</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 61</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 40</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 96 67 93 92 20 16 17 9 68 23 107 69 106 105 86 10 30 25 5 0 2 66 8 11 1 12 3 108 19 24 22 97 31 4 21 109 28 29 18 27 7 13 26 6 14 15</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\depend\bsp_log_message.c</name>
+      <outputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 63</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 59</file>
+        </tool>
+        <tool>
+          <name>__cstat</name>
+          <file> 33</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 92 105 7 93 1 31 96 30 23 20 2 19 28 14 87 77 10 5 8 3 22 21 18 26 34 67 25 107 69 86 16 68 17 9 106 0 66 11 12 108 24 97 4 109 29 27 13 6 15 103</file>
+        </tool>
+        <tool>
+          <name>ICCARM</name>
+          <file> 103 87 34 77 96 67 93 92 20 16 17 9 68 23 107 69 106 105 86 10 30 25 5 0 2 66 8 11 1 12 3 108 19 24 22 97 31 4 21 109 28 29 18 27 7 13 26 6 14 15</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\Debug\Exe\log_message_n32g455rcl6.out</name>
+      <outputs>
+        <tool>
+          <name>ILINK</name>
+          <file> 41</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ILINK</name>
+          <file> 50 59 100 99 56 43 38 115 94 57 95 111 54 61 46 44 58 45</file>
+        </tool>
+      </inputs>
+    </file>
+  </configuration>
+  <configuration>
+    <name>Release</name>
+    <outputs/>
+    <forcedrebuild>
+      <name>[MULTI_TOOL]</name>
+      <tool>ILINK</tool>
+    </forcedrebuild>
+  </configuration>
+</project>
+
+
