@@ -1,8 +1,6 @@
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 #include "chip_select.h"
 #include ".\snail_data_types.h"
-#include "sysctrl.h"
-#include "intrinsics.h"
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 #if defined(stm32f103rct6)
 
@@ -12,5 +10,8 @@
 #include ".\bsp_system_tick_hc32l136k8ta.h"
 #elif defined(hc32l176kata)
 #include ".\bsp_system_tick_hc32l176kata.h"
+#elif defined(n32g455rcl7)
+#include ".\bsp_system_tick_n32g455rcl7.h"
+
 #endif
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

@@ -136,7 +136,14 @@ void pbc_stop_timerIsOnceTriggered(timerClock_def* in_timer);
 //------------------------------------------------------------------------------
 void pbc_reload_timerClock(timerClock_def* in_timer,sdt_int16u in_value);
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
+/*
+macro_createTimer(timer_xxx,timerType_millisecond,0);
+pbc_timerClockRun_task(&timer_xxx);
+if(pbc_pull_timerIsCompleted(&timer_xxx))
+{
+    pbc_reload_timerClock(&timer_xxx,1000);
+}       
+*/
 
 #endif
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

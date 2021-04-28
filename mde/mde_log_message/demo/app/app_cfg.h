@@ -8,7 +8,7 @@
 #include "..\..\..\..\pbc\pbc_system_tick\pbc_system_tick.h"
 
 //------------------------------------------------------------------------------
-#include "..\..\..\..\mde\mde_mbus_link\mde_mbus_link.h"
+#include "..\..\..\..\mde\mde_log_message\mde_log_message.h"
 
 //------------------------------------------------------------------------------
 

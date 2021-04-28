@@ -63,22 +63,6 @@ static void log_link_status_jump(log_oper_def* mix_pLog_oper)
 {
     log_run_status_def read_log_run_status;
     
-    /*
-    pbc_timerClockRun_task(&mix_pMbslk_oper->timer_brate_cal);
-    
-    pbc_timerMillRun_task(&mix_pMbslk_oper->timer_rx_timeout);
-    pbc_timerMillRun_task(&mix_pMbslk_oper->timer_tx_timeout);
-    
-    if(pbc_pull_timerIsOnceTriggered(&mix_pMbslk_oper->timer_rx_timeout))
-    {
-        mix_pMbslk_oper->mbslk_run_status = mbslk_rs_idle;
-    }    
-    if(pbc_pull_timerIsOnceTriggered(&mix_pMbslk_oper->timer_tx_timeout))
-    {
-        mix_pMbslk_oper->mbslk_run_status = mbslk_rs_idle;
-        mix_pMbslk_oper->transmit_monitor = mbk_trans_mon_error;
-    }*/
-    
     do
     {
         read_log_run_status = mix_pLog_oper->log_run_status;
@@ -86,6 +70,7 @@ static void log_link_status_jump(log_oper_def* mix_pLog_oper)
         {
             case log_rs_idle:
             {
+                mix_pLog_oper->entry_phy_rx();
                 mix_pLog_oper->log_run_status = log_rs_rx_wait;
                 break;
             }
@@ -130,6 +115,7 @@ static void log_link_status_jump(log_oper_def* mix_pLog_oper)
             {
                 sdt_int16u surplus_bytes;
                 
+                mix_pLog_oper->entry_phy_tx();
                 mix_pLog_oper->transmit_index = 0;
                 surplus_bytes = mix_pLog_oper->transfet_bytes_tx_phy(&mix_pLog_oper->tx_buff[0],(mix_pLog_oper->transmit_len - mix_pLog_oper->transmit_index));
                 mix_pLog_oper->transmit_index = mix_pLog_oper->transmit_len - surplus_bytes;
@@ -156,10 +142,9 @@ static void log_link_status_jump(log_oper_def* mix_pLog_oper)
             {
                 if(mix_pLog_oper->pull_complete_tx_data())
                 {
+                    mix_pLog_oper->entry_phy_rx();
                     mix_pLog_oper->log_run_status = log_rs_rx_wait;
                 }
-                
-                pbc_stop_timerIsOnceTriggered(&mix_pMbslk_oper->timer_tx_timeout);
                 break;
             }
             default:
@@ -177,7 +162,7 @@ static void log_link_status_jump(log_oper_def* mix_pLog_oper)
 static void alone_log_link_task(log_oper_def* mix_pLog_oper)
 {
     mix_pLog_oper->pull_look_for_byte_rx();
-    mbus_link_status_jump(mix_pLog_oper);
+    log_link_status_jump(mix_pLog_oper);
 }
 //++++++++++++++++++++++++++++++++++++interface+++++++++++++++++++++++++++++++++
 //------------------------------------------------------------------------------
