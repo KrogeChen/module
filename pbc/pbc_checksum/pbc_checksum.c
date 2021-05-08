@@ -3,6 +3,8 @@
 //date: 06/11/2019
 //-------------------------------------------------------------------
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#include ".\depend\snail_data_types.h"
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //CRC计算程序,按字节查表法
 //-------------------------------------------------------------------
 static const sdt_int16u chCRCTalbe[256] =
@@ -46,7 +48,7 @@ static const sdt_int16u chCRCTalbe[256] =
 //入口:被计算数据的指针,数据长度
 //出口:CRC16值                                                                           
 //-------------------------------------------------------------------                                                                                                                                      
-sdt_int16u pbc_crc16_modbus(sdt_int8u* in_pBytes,sdt_int16u in_length);
+sdt_int16u pbc_crc16_modbus(sdt_int8u* in_pBytes,sdt_int16u in_length)
 {
     sdt_int16u crc;
     sdt_int8u da;
@@ -62,7 +64,7 @@ sdt_int16u pbc_crc16_modbus(sdt_int8u* in_pBytes,sdt_int16u in_length);
     return(crc);   
 }
 //-------------------------------------------------------------------
-void pbc_crc16_modbus_byte(sdt_int8u* in_pBytes,sdt_int16u in_length,sdt_int8u* out_pCrcdata);
+void pbc_crc16_modbus_byte(sdt_int8u* in_pBytes,sdt_int16u in_length,sdt_int8u* out_pCrcdata)
 {
     sdt_int16u crc;
     sdt_int8u da;

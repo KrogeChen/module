@@ -1,12 +1,16 @@
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-//name:log链路代码，日常数据模块
+//name:modbus 从机代码 RTU模式
 //version:10
-//date: 04/27/2021
+//date: 05/07/2021
 //------------------------------------------------------------------------------
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 #include "..\..\pbc\pbc_system_tick\pbc_system_tick.h"
+#include "..\..\pbc\pbc_data_convert\pbc_data_convert.h"
+#include "..\..\pbc\pbc_checksum\pbc_checksum.h"
 //------------------------------------------------------------------------------
-#include ".\depend\bsp_log_message.h"
+#include ".\depend\bsp_modbus_slave.h"
+//------------------------------------------------------------------------------
+#include ".\mde_modbus_slave.h"
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 #define TX_TIMEOUT         2000  //2s
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -68,72 +72,73 @@ typedef struct
 //------------------------------------------------------------------------------
 static sdt_bool modbus_slave_protocol(mdsRtu_oper_def* mix_pMdsRtu_oper)
 {
-    sdt_int8u rd_lenght;
+    sdt_int16u rd_length;
     sdt_int16u rx_readReg_addr;
     sdt_int8u  rx_readReg_len;
     sdt_int16u rx_writeReg_addr;
     sdt_int8u  rx_writeReg_len;
     
-    rd_lenght = mix_pMdsRtu_oper->receive_len;
+    rd_length = mix_pMdsRtu_oper->receive_len;
     
-    if(rd_lenght < 6)
+    if(rd_length < 6)
     {
         return(sdt_false);
     }
-    if((mix_pMdsRtu_oper->.mdsRtu_parameter.mdsRtu_address == mix_pMdsRtu_oper->rx_buff[0]) || (0xFE == mix_pMdsRtu_oper->rx_buff[0]) || (0xFA == mix_pMdsRtu_oper->rx_buff[0]))  //address
+    if((mix_pMdsRtu_oper->mdsRtu_parameter.mdsRtu_address == mix_pMdsRtu_oper->rx_buff[0]) || (0xFE == mix_pMdsRtu_oper->rx_buff[0]) || (0xFA == mix_pMdsRtu_oper->rx_buff[0]))  //address
     {
         sdt_int8u crc_value[2];
         sdt_int8u i;
         
-        Crc16CalculateOfByte(&mix_pMdsRtu_oper->rx_buff[0],(rd_length-2),&crc_value[0]);
+        pbc_crc16_modbus_byte(&mix_pMdsRtu_oper->rx_buff[0],(rd_length-2),&crc_value[0]);
+        
         if((crc_value[1] == mix_pMdsRtu_oper->rx_buff[rd_length-2]) && (crc_value[0] == mix_pMdsRtu_oper->rx_buff[rd_length-1]))//crc
         {
             
             if(0x03 == mix_pMdsRtu_oper->rx_buff[1])
             {
-                if(rd_lenght < 8)
+                if(rd_length < 8)
                 {
                     return(sdt_false);
                 }
                 else
                 {
-                        rx_readReg_addr = pbc_arrayToInt16u_bigEndian(&mix_pMdsRtu_oper->rx_buff[2]);
-                        rx_readReg_len = pbc_arrayToInt16u_bigEndian(&mix_pMdsRtu_oper->rx_buff[4]);
-                        if(rx_reddReg_len > max_reg_len)
-                        {//长度错误,应答
-                            mix_pMdsRtu_oper->tx_buff[0] = mix_pMdsRtu_oper->mdsRtu_parameter.mdsRtu_address;
-                            mix_pMdsRtu_oper->tx_buff[1] = 0x83;
-                            mix_pMdsRtu_oper->tx_buff[2] = 2;
-                            mix_pMdsRtu_oper->tx_buff[3] = 0;
-                            mix_pMdsRtu_oper->tx_buff[4] = 0;
-                            mix_pMdsRtu_oper->transmit_len = 5;
-                            
+                    rx_readReg_addr = pbc_arrayToInt16u_bigEndian(&mix_pMdsRtu_oper->rx_buff[2]);
+                    rx_readReg_len = pbc_arrayToInt16u_bigEndian(&mix_pMdsRtu_oper->rx_buff[4]);
+                    if(rx_readReg_len > max_reg_len)
+                    {//长度错误,应答
+                        mix_pMdsRtu_oper->tx_buff[0] = mix_pMdsRtu_oper->mdsRtu_parameter.mdsRtu_address;
+                        mix_pMdsRtu_oper->tx_buff[1] = 0x83;
+                        mix_pMdsRtu_oper->tx_buff[2] = 2;
+                        mix_pMdsRtu_oper->tx_buff[3] = 0;
+                        mix_pMdsRtu_oper->tx_buff[4] = 0;
+                        mix_pMdsRtu_oper->transmit_len = 5;
+                        
+                    }
+                    else if(mix_pMdsRtu_oper->mdsRtu_parameter.cbk_read_modbus_slave_register(rx_readReg_addr,rx_readReg_len,&mix_pMdsRtu_oper->reg_details[0]))
+                    {//读取完成,组帧应答
+                        mix_pMdsRtu_oper->tx_buff[0] = mix_pMdsRtu_oper->mdsRtu_parameter.mdsRtu_address;
+                        mix_pMdsRtu_oper->tx_buff[1] = 0x03;
+                        mix_pMdsRtu_oper->tx_buff[2] = rx_readReg_len * 2;//byte count
+                        for(i = 0;i < rx_readReg_len;i++)
+                        {
+                            pbc_int16uToArray_bigEndian(mix_pMdsRtu_oper->reg_details[i],&mix_pMdsRtu_oper->tx_buff[(i*2)+3]);
                         }
-                        else if(mix_pMdsRtu_oper->mdsRtu_parameter.cbk_read_modbus_slave_register(rx_readReg_addr,rx_readReg_len,&mix_pMdsRtu_oper->reg_details[0]))
-                        {//读取完成,组帧应答
-                            mix_pMdsRtu_oper->tx_buff[0] = mix_pMdsRtu_oper->mdsRtu_parameter.mdsRtu_address;
-                            mix_pMdsRtu_oper->tx_buff[1] = 0x03;
-                            mix_pMdsRtu_oper->tx_buff[2] = rx_reddReg_len * 2;//byte count
-                            for(i = 0;i < rx_reddReg_len;i++)
-                            {
-                                pbc_int16uToArray_bigEndian(mix_pMdsRtu_oper->reg_details[i],mix_pMdsRtu_oper->tx_buff[i+3]);
-                            }
-                            mix_pMdsRtu_oper->transmit_len = 3 + rx_reddReg_len * 2;
-                        }
-                        else
-                        {//读取发生错误,应答
-                            mix_pMdsRtu_oper->tx_buff[0] = mix_pMdsRtu_oper->mdsRtu_parameter.mdsRtu_address;
-                            mix_pMdsRtu_oper->tx_buff[1] = 0x83;
-                            mix_pMdsRtu_oper->tx_buff[2] = 2;
-                            mix_pMdsRtu_oper->tx_buff[3] = 0;
-                            mix_pMdsRtu_oper->tx_buff[4] = 0;
-                            mix_pMdsRtu_oper->transmit_len = 5;
-                        }  
+                        mix_pMdsRtu_oper->transmit_len = 3 + rx_readReg_len * 2;
+                    }
+                    else
+                    {//读取发生错误,应答
+                        mix_pMdsRtu_oper->tx_buff[0] = mix_pMdsRtu_oper->mdsRtu_parameter.mdsRtu_address;
+                        mix_pMdsRtu_oper->tx_buff[1] = 0x83;
+                        mix_pMdsRtu_oper->tx_buff[2] = 2;
+                        mix_pMdsRtu_oper->tx_buff[3] = 0;
+                        mix_pMdsRtu_oper->tx_buff[4] = 0;
+                        mix_pMdsRtu_oper->transmit_len = 5;
+                    }  
                 }
             }
             else if(0x06 == mix_pMdsRtu_oper->rx_buff[1])
             {
-                if(rd_lenght < 8)
+                if(rd_length < 8)
                 {
                     return(sdt_false);
                 }
@@ -164,7 +169,7 @@ static sdt_bool modbus_slave_protocol(mdsRtu_oper_def* mix_pMdsRtu_oper)
                     }                    
                 }
             }
-            else if(0x10 == mix_oper->receive_buff[1])
+            else if(0x10 == mix_pMdsRtu_oper->rx_buff[1])
             {
                 rx_writeReg_addr = pbc_arrayToInt16u_bigEndian(&mix_pMdsRtu_oper->rx_buff[2]);
                 rx_writeReg_len = pbc_arrayToInt16u_bigEndian(&mix_pMdsRtu_oper->rx_buff[4]);
@@ -172,7 +177,7 @@ static sdt_bool modbus_slave_protocol(mdsRtu_oper_def* mix_pMdsRtu_oper)
                 {
                     return(sdt_false);
                 }
-                else if(rd_lenght < (9+rx_writeReg_len*2)) //报文长度不足
+                else if(rd_length < (9+rx_writeReg_len*2)) //报文长度不足
                 {
                     return(sdt_false);
                 }
@@ -180,7 +185,7 @@ static sdt_bool modbus_slave_protocol(mdsRtu_oper_def* mix_pMdsRtu_oper)
                 {
                     for(i = 0;i < rx_writeReg_len;i++)
                     {
-                        mix_pMdsRtu_oper->reg_details[i] = pbc_arrayToInt16u_bigEndian(&mix_pMdsRtu_oper->rx_buff[i+7]);
+                        mix_pMdsRtu_oper->reg_details[i] = pbc_arrayToInt16u_bigEndian(&mix_pMdsRtu_oper->rx_buff[(i*2)+7]);
                     }
                     if(mix_pMdsRtu_oper->mdsRtu_parameter.cbk_write_modbus_slave_register(rx_writeReg_addr,rx_writeReg_len,&mix_pMdsRtu_oper->reg_details[0]))
                     {
@@ -190,7 +195,7 @@ static sdt_bool modbus_slave_protocol(mdsRtu_oper_def* mix_pMdsRtu_oper)
                         mix_pMdsRtu_oper->tx_buff[3] = mix_pMdsRtu_oper->rx_buff[3];
                         mix_pMdsRtu_oper->tx_buff[4] = mix_pMdsRtu_oper->rx_buff[4];
                         mix_pMdsRtu_oper->tx_buff[5] = mix_pMdsRtu_oper->rx_buff[5];
-                        mix_oper->transmit_length = 6;
+                        mix_pMdsRtu_oper->transmit_len = 6;
                     }
                     else
                     {//write error
@@ -200,11 +205,11 @@ static sdt_bool modbus_slave_protocol(mdsRtu_oper_def* mix_pMdsRtu_oper)
                         mix_pMdsRtu_oper->tx_buff[3] = mix_pMdsRtu_oper->rx_buff[3];
                         mix_pMdsRtu_oper->tx_buff[4] = mix_pMdsRtu_oper->rx_buff[4];
                         mix_pMdsRtu_oper->tx_buff[5] = mix_pMdsRtu_oper->rx_buff[5];
-                        mix_oper->transmit_length = 6; 
+                        mix_pMdsRtu_oper->transmit_len = 6; 
                     }                    
                 }
             }
-            else if(0x17 == mix_oper->receive_buff[1])
+            else if(0x17 == mix_pMdsRtu_oper->rx_buff[1])
             {
                 rx_readReg_addr = pbc_arrayToInt16u_bigEndian(&mix_pMdsRtu_oper->rx_buff[2]);
                 rx_readReg_len = pbc_arrayToInt16u_bigEndian(&mix_pMdsRtu_oper->rx_buff[4]);
@@ -215,11 +220,11 @@ static sdt_bool modbus_slave_protocol(mdsRtu_oper_def* mix_pMdsRtu_oper)
                 {
                     return(sdt_false);
                 }
-                else if(rx_reddReg_len > max_reg_len) //长度溢出
+                else if(rx_readReg_len > max_reg_len) //长度溢出
                 {
                     return(sdt_false);
                 }
-                else if(rd_lenght < (13 + rx_writeReg_len*2)) //报文长度不足
+                else if(rd_length < (13 + rx_writeReg_len*2)) //报文长度不足
                 {
                     return(sdt_false);
                 }
@@ -227,20 +232,20 @@ static sdt_bool modbus_slave_protocol(mdsRtu_oper_def* mix_pMdsRtu_oper)
                 {
                     for(i = 0;i < rx_writeReg_len;i++)
                     {
-                        mix_pMdsRtu_oper->reg_details[i] = pbc_arrayToInt16u_bigEndian(&mix_pMdsRtu_oper->rx_buff[i+11]);
+                        mix_pMdsRtu_oper->reg_details[i] = pbc_arrayToInt16u_bigEndian(&mix_pMdsRtu_oper->rx_buff[(i*2)+11]);
                     }
-                    if(mix_pMdsRtu_oper->mdsRtu_parameter.cbk_write_modbus_slave_register(rx_writeReg_addr,rx_writeReg_len,&mix_pMdsRtu_oper->reg_details))
+                    if(mix_pMdsRtu_oper->mdsRtu_parameter.cbk_write_modbus_slave_register(rx_writeReg_addr,rx_writeReg_len,&mix_pMdsRtu_oper->reg_details[0]))
                     {
-                        if(mix_pMdsRtu_oper->mdsRtu_parameter.cbk_read_modbus_slave_register(rx_readReg_addr,rx_readReg_len,&mix_pMdsRtu_oper->reg_details))
+                        if(mix_pMdsRtu_oper->mdsRtu_parameter.cbk_read_modbus_slave_register(rx_readReg_addr,rx_readReg_len,&mix_pMdsRtu_oper->reg_details[0]))
                         {//读取完成,组帧应答
                             mix_pMdsRtu_oper->tx_buff[0] = mix_pMdsRtu_oper->mdsRtu_parameter.mdsRtu_address;
                             mix_pMdsRtu_oper->tx_buff[1] = 0x17;
-                            mix_pMdsRtu_oper->tx_buff[2] = rx_reddReg_len * 2;//byte count
-                            for(i = 0;i < rx_reddReg_len;i++)
+                            mix_pMdsRtu_oper->tx_buff[2] = rx_readReg_len * 2;//byte count
+                            for(i = 0;i < rx_readReg_len;i++)
                             {
-                                pbc_int16uToArray_bigEndian(mix_pMdsRtu_oper->reg_details[i],mix_pMdsRtu_oper->tx_buff[i+3]);
+                                pbc_int16uToArray_bigEndian(mix_pMdsRtu_oper->reg_details[i],&mix_pMdsRtu_oper->tx_buff[(i*2)+3]);
                             }                            
-                            mix_pMdsRtu_oper->transmit_len = 3 + rx_reddReg_len * 2;
+                            mix_pMdsRtu_oper->transmit_len = 3 + rx_readReg_len * 2;
                         }
                         else
                         {//读取发生错误,应答
@@ -257,13 +262,14 @@ static sdt_bool modbus_slave_protocol(mdsRtu_oper_def* mix_pMdsRtu_oper)
             {
                 return(sdt_false);
             }
-            Crc16CalculateOfByte(&mix_pMdsRtu_oper->transmit_buff[0],mix_pMdsRtu_oper->transmit_length,&crc_value[0]);//crc
-            mix_pMdsRtu_oper->transmit_buff[mix_pMdsRtu_oper->transmit_length] = crc_value[1];
-            mix_pMdsRtu_oper->transmit_buff[mix_pMdsRtu_oper->transmit_length+1] = crc_value[0];
-            mix_pMdsRtu_oper->transmit_length += 2;
+            pbc_crc16_modbus_byte(&mix_pMdsRtu_oper->tx_buff[0],mix_pMdsRtu_oper->transmit_len,&crc_value[0]);//crc
+            mix_pMdsRtu_oper->tx_buff[mix_pMdsRtu_oper->transmit_len] = crc_value[1];
+            mix_pMdsRtu_oper->tx_buff[mix_pMdsRtu_oper->transmit_len+1] = crc_value[0];
+            mix_pMdsRtu_oper->transmit_len += 2;
             return(sdt_true);
         }
     }
+    return(sdt_false);
 }
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //重新开始字符宽度计时
@@ -277,7 +283,7 @@ static void restart_bus_free_timer(mdsRtu_oper_def* mix_pMdsRtu_oper)
 //in:   in_chart_width 目前字符宽度，35代表3.5T的目标宽度
 //out:  sdt_true 满足目标的字符空闲宽度
 //------------------------------------------------------------------------------
-static sdt_bool pull_bus_free_finish(mdsRtu_oper_def* mix_pMdsRtu_oper sdt_int8u in_chart_width)
+static sdt_bool pull_bus_free_finish(mdsRtu_oper_def* mix_pMdsRtu_oper,sdt_int8u in_chart_width)
 {
     sdt_int16u rd_us_tick;
     sdt_int16u death_ticks;
@@ -287,7 +293,7 @@ static sdt_bool pull_bus_free_finish(mdsRtu_oper_def* mix_pMdsRtu_oper sdt_int8u
     death_ticks = rd_us_tick - mix_pMdsRtu_oper->timer_busfree_cnt;
 
     expect_ticks = 1000000;
-    expect_ticks = (expect_ticks*(sdt_int32u)in_chart_width)/mix_pMdsRtu_oper->mdsRtu_parameter.mdsRtu_baudrate;
+    expect_ticks = (expect_ticks*(sdt_int32u)in_chart_width)/mix_pMdsRtu_oper->mdsRtu_parameter.mdsRtu_phyProperty.mdsRtu_baudrate;
     if(death_ticks > expect_ticks)
     {
         return(sdt_true);
@@ -368,7 +374,7 @@ static void modbus_slave_status_jump(mdsRtu_oper_def* mix_pMdsRtu_oper)
             case mdsRtu_rs_tx_start:
             {
                 mix_pMdsRtu_oper->entry_phy_tx();
-                mix_pMdsRtu_oper->mdsRtu_run_status = mdsRtu_rs_tx_35t
+                mix_pMdsRtu_oper->mdsRtu_run_status = mdsRtu_rs_tx_35t;
                 restart_bus_free_timer(mix_pMdsRtu_oper);
                 break;
             }
@@ -399,7 +405,7 @@ static void modbus_slave_status_jump(mdsRtu_oper_def* mix_pMdsRtu_oper)
             }
             case mdsRtu_rs_tx_stop:
             {
-                if(mix_pLog_oper->pull_complete_tx_data())
+                if(mix_pMdsRtu_oper->pull_complete_tx_data())
                 {
                     restart_bus_free_timer(mix_pMdsRtu_oper);
                     mix_pMdsRtu_oper->mdsRtu_run_status = mdsRtu_rs_tx_complete;
@@ -477,18 +483,22 @@ void mde_push_modbus_slave_parameter(sdt_int8u in_solid_number,mdsRtu_parameter_
         
         if(mdsRtu_oper_solid[in_solid_number].mdsRtu_parameter.mdsRtu_phyProperty.mdsRtu_baudrate != mix_pMdsRtu_parameter->mdsRtu_phyProperty.mdsRtu_baudrate)
         {
+            mdsRtu_oper_solid[in_solid_number].mdsRtu_parameter.mdsRtu_phyProperty.mdsRtu_baudrate = mix_pMdsRtu_parameter->mdsRtu_phyProperty.mdsRtu_baudrate;
             phy_reload_once = sdt_true;
         }
         if(mdsRtu_oper_solid[in_solid_number].mdsRtu_parameter.mdsRtu_phyProperty.mdsRtu_sysFrequency != mix_pMdsRtu_parameter->mdsRtu_phyProperty.mdsRtu_sysFrequency)
         {
+            mdsRtu_oper_solid[in_solid_number].mdsRtu_parameter.mdsRtu_phyProperty.mdsRtu_sysFrequency = mix_pMdsRtu_parameter->mdsRtu_phyProperty.mdsRtu_sysFrequency;
             phy_reload_once = sdt_true;
         }
         if(mdsRtu_oper_solid[in_solid_number].mdsRtu_parameter.mdsRtu_phyProperty.mdsRtu_parity != mix_pMdsRtu_parameter->mdsRtu_phyProperty.mdsRtu_parity)
         {
+            mdsRtu_oper_solid[in_solid_number].mdsRtu_parameter.mdsRtu_phyProperty.mdsRtu_parity = mix_pMdsRtu_parameter->mdsRtu_phyProperty.mdsRtu_parity;
             phy_reload_once = sdt_true;
         }
         if(mdsRtu_oper_solid[in_solid_number].mdsRtu_parameter.mdsRtu_phyProperty.mdsRtu_stopBits != mix_pMdsRtu_parameter->mdsRtu_phyProperty.mdsRtu_stopBits)
         {
+            mdsRtu_oper_solid[in_solid_number].mdsRtu_parameter.mdsRtu_phyProperty.mdsRtu_stopBits = mix_pMdsRtu_parameter->mdsRtu_phyProperty.mdsRtu_stopBits;
             phy_reload_once = sdt_true;
         }
         mdsRtu_oper_solid[in_solid_number].mdsRtu_parameter.cbk_read_modbus_slave_register = mix_pMdsRtu_parameter->cbk_read_modbus_slave_register;

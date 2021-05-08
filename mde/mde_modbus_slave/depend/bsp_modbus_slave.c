@@ -11,6 +11,6 @@
 #elif defined(hc32l176kata)
 
 #elif defined(n32g455rcl7)
-#include ".\bsp_log_message_n32g455rcl7.h"
+#include ".\bsp_modbus_slave_n32g455rcl7.h"
 #endif
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

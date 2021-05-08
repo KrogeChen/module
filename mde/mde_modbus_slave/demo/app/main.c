@@ -5,6 +5,8 @@ void app_general_task(void)
 {
 }
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+sdt_int16u demo_wreg[10];
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //name:读寄存器数据,mde_modbus_slave 回调函数
 //fun:
 //in: in_reg_addr 寄存器地址
@@ -24,20 +26,20 @@ sdt_bool demo_read_modbus_slave_register(sdt_int16u in_reg_addr,sdt_int8u in_reg
         {
            case 0:
            {
-               *out_pWords = 0x1234;
+               *out_pWords = demo_wreg[0] + 1;
                break;
            }      
            case 1:
            {
-               *out_pWords = 0x4567;
+               *out_pWords = demo_wreg[1] + 1;
                break;
            }   
            case 2:
            {
-               *out_pWords = 0x5687;
+               *out_pWords = demo_wreg[2] + 1;
                break;
            }   
-           default
+           default:
            {
                break;
            }
@@ -49,7 +51,7 @@ sdt_bool demo_read_modbus_slave_register(sdt_int16u in_reg_addr,sdt_int8u in_reg
     return(sdt_true);
 }
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-static sdt_int16u demo_wreg[10];
+
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //name:写寄存器数据,mde_modbus_slave 回调函数
 //fun:
@@ -83,7 +85,7 @@ sdt_bool demo_write_modbus_slave_register(sdt_int16u in_reg_addr,sdt_int8u in_re
                demo_wreg[2] = *in_pWords;
                break;
            }   
-           default
+           default:
            {
                break;
            }
@@ -101,7 +103,7 @@ sdt_bool demo_write_modbus_slave_register(sdt_int16u in_reg_addr,sdt_int8u in_re
 //------------------------------------------------------------------------------
 void app_modbus_slave_demo_task(void)
 {
-    sdt_bool cfged = sdt_false;
+    static sdt_bool cfged = sdt_false;
     
     if(cfged)
     {

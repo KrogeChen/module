@@ -11,15 +11,17 @@
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 typedef enum
 {
-    mdsRtu_parity_none  = 0x00,
-    mdsRtu_parity_even  = 0x01,
-    mdsRtu_parity_odd   = 0x02,
+    mdsRtu_parity_reserve = 0x00, //保留
+    mdsRtu_parity_none    = 0x01,
+    mdsRtu_parity_even    = 0x02,
+    mdsRtu_parity_odd     = 0x03,
 }mdsRtu_parity_def;
 //-----------------------------------------------------------------------------
 typedef enum
 {
-    mdsRtu_stopBits_one = 0x00,
-    mdsRtu_stopBits_two = 0x01,
+    mdsRtu_stopBits_reserve = 0x00,
+    mdsRtu_stopBits_one     = 0x01,
+    mdsRtu_stopBits_two     = 0x02,
 }mdsRtu_stopBits_def;
 //-----------------------------------------------------------------------------
 typedef struct

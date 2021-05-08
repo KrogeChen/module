@@ -4,7 +4,7 @@
     #include ".\snail_data_types.h"
 #endif
 //-------------------------------------------------------------------------------------------------
-#include "..\mde_log_message.h"
+#include "..\mde_modbus_slave.h"
 #include "n32g45x.h"
 #include "intrinsics.h"
 //-------------------------------------------------------------------------------------------------
@@ -78,15 +78,15 @@ void bsp_phy0_cfg(void)
 //-----------------------------------------------------------------------------
     TIM_DeInit(TIM4);
     /* Time base configuration */    
-    TIM_TimeBaseStructure.Prescaler =720-1;                    //72M 100K
-    TIM_TimeBaseStructure.Period =10-1  ;                      // 当定时器从0计数到999，即为1000次，为一个定时周期,1个unit 10us
+    TIM_TimeBaseStructure.Prescaler =72-1;                    //72M 1000K
+    TIM_TimeBaseStructure.Period = 0xffff  ;                      // 当定时器从0计数到999，即为1000次，为一个定时周期,1个unit 10us
     TIM_TimeBaseStructure.ClkDiv = 0 ;        //设置时钟分频系数：不分频(这里用不到)
     TIM_TimeBaseStructure.CntMode = TIM_CNT_MODE_UP;     //向上计数模式
     TIM_InitTimeBase(TIM4, &TIM_TimeBaseStructure);
     TIM_ClearFlag(TIM4,TIM_FLAG_UPDATE);
     TIM_Enable(TIM4,ENABLE); 
-    while(SET!=TIM_GetFlagStatus(TIM4,TIM_FLAG_UPDATE));
-    TIM_Enable(TIM4,DISABLE); 
+    //while(SET!=TIM_GetFlagStatus(TIM4,TIM_FLAG_UPDATE));
+    //TIM_Enable(TIM4,DISABLE); 
 //-----------------------------------------------------------------------------
     NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);  
     NVIC_InitStructure.NVIC_IRQChannel = TIM4_IRQn;       
@@ -95,14 +95,17 @@ void bsp_phy0_cfg(void)
     NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;  
     NVIC_Init(&NVIC_InitStructure);  
 //-----------------------------------------------------------------------------
-    TIM_ClrIntPendingBit(TIM4, TIM_INT_UPDATE);
-    TIM_ClearFlag(TIM4,TIM_FLAG_UPDATE);               //清除溢出中断标志  
-    TIM_ConfigInt(TIM4,TIM_INT_UPDATE,ENABLE);  
+    //TIM_ClrIntPendingBit(TIM4, TIM_INT_UPDATE);
+    //TIM_ClearFlag(TIM4,TIM_FLAG_UPDATE);               //清除溢出中断标志  
+    //TIM_ConfigInt(TIM4,TIM_INT_UPDATE,ENABLE);  
 }
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 volatile static sdt_int8u tx_buffer[256];
 static sdt_int8u tx_idx_str,tx_idx_end;
+//------------------------------------------------------------------------------
+volatile static sdt_int8u rx_buffer[256];
+static sdt_int8u rx_idx_str,rx_idx_end;
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 static sdt_bool tx_complete;
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -125,7 +128,8 @@ void UART5_IRQHandler(void)
     else if(SET==USART_GetFlagStatus(UART5,USART_FLAG_RXDNE))
     {
         Read_reg=USART_ReceiveData(UART5);
-        //InputRonudQueue(&Uart5_Queue,&TRXD_QueueBuffer[0],Read_reg);
+        rx_buffer[rx_idx_end] = Read_reg;
+        rx_idx_end ++;
     }
     if(SET==USART_GetIntStatus(UART5,USART_INT_TXDE))
     {
@@ -147,18 +151,25 @@ void UART5_IRQHandler(void)
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 void bsp_look_for_byte_rx_phy0(void)
 {
-     /*sdt_int8u now_rx_byte;
-   
-    while(rx_buff_addr_backup != M0P_DMAC->DSTADR0)  //一次性读取缓冲区数据
+    sdt_int8u now_rx_byte;
+    sdt_bool buffer_empty;
+    
+    do
     {
-        now_rx_byte = *(sdt_int8u*)rx_buff_addr_backup;
-        push_mbus_one_receive_byte(bgk_s0,now_rx_byte);     //压入一个字节的数据到link
-        rx_buff_addr_backup ++;
-        if(rx_buff_addr_backup > (sdt_int32u)&dma_receive_buff[sizeof(dma_receive_buff) - 1])
+        buffer_empty = sdt_true;
+        __disable_interrupt(); 
+        if(rx_idx_str != rx_idx_end)
         {
-            rx_buff_addr_backup = (sdt_int32u)&dma_receive_buff[0];
+            now_rx_byte = rx_buffer[rx_idx_str];
+            rx_idx_str ++;
+            buffer_empty = sdt_false;
         }
-    }*/
+        __enable_interrupt();
+        if(sdt_false == buffer_empty)
+        {
+            mde_push_modbus_slave_receive_byte(0,now_rx_byte);
+        }
+    }while(sdt_false == buffer_empty);
 }
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 static sdt_bool start_cpt;
@@ -206,5 +217,14 @@ void bsp_entry_phy_tx_phy0(void)
     UART5->CTRL1&=~0x00000004;  //RE  Receiver is Disable
     USART_ConfigInt(UART5,USART_INT_RXDNE,ENABLE);
     macro_trs_transmit
+}
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+void bsp_phy_reload_phy0(void)
+{
+}
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+sdt_int16u bsp_pull_us_tick(void)
+{
+    return(TIM4->CNT);
 }
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
