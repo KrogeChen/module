@@ -114,7 +114,7 @@ void app_modbus_slave_demo_task(void)
         mdsRtu_parameter_def cfg_mdsRtu_parameter;
         
         cfg_mdsRtu_parameter.mdsRtu_address = 1;
-        cfg_mdsRtu_parameter.mdsRtu_phyProperty.mdsRtu_baudrate = 9600;
+        cfg_mdsRtu_parameter.mdsRtu_phyProperty.mdsRtu_baudrate = 19200;
         cfg_mdsRtu_parameter.mdsRtu_phyProperty.mdsRtu_sysFrequency = 72000000; //系统频率，用于bsp的波特率计算
         cfg_mdsRtu_parameter.mdsRtu_phyProperty.mdsRtu_parity = mdsRtu_parity_none;
         cfg_mdsRtu_parameter.mdsRtu_phyProperty.mdsRtu_stopBits = mdsRtu_stopBits_one;

@@ -12,24 +12,24 @@
 typedef enum
 {
     mdsRtu_parity_reserve = 0x00, //保留
-    mdsRtu_parity_none    = 0x01,
-    mdsRtu_parity_even    = 0x02,
-    mdsRtu_parity_odd     = 0x03,
+    mdsRtu_parity_none    = 0x01, //无校验
+    mdsRtu_parity_even    = 0x02, //偶校验
+    mdsRtu_parity_odd     = 0x03, //奇校验
 }mdsRtu_parity_def;
 //-----------------------------------------------------------------------------
 typedef enum
 {
-    mdsRtu_stopBits_reserve = 0x00,
-    mdsRtu_stopBits_one     = 0x01,
-    mdsRtu_stopBits_two     = 0x02,
+    mdsRtu_stopBits_reserve = 0x00, //保留
+    mdsRtu_stopBits_one     = 0x01, //1位停止位
+    mdsRtu_stopBits_two     = 0x02, //2位停止位
 }mdsRtu_stopBits_def;
 //-----------------------------------------------------------------------------
 typedef struct
 {
-    sdt_int32u            mdsRtu_baudrate;
-    sdt_int32u            mdsRtu_sysFrequency;
-    mdsRtu_parity_def     mdsRtu_parity;
-    mdsRtu_stopBits_def   mdsRtu_stopBits;    
+    sdt_int32u            mdsRtu_baudrate;     //波特率
+    sdt_int32u            mdsRtu_sysFrequency; //系统频率
+    mdsRtu_parity_def     mdsRtu_parity;       //校验方式
+    mdsRtu_stopBits_def   mdsRtu_stopBits;     //停止位数
 }mdsRtu_phyProperty_def;
 //-----------------------------------------------------------------------------
 typedef struct 
@@ -54,16 +54,16 @@ void mde_modbus_slave_task(void);
 //++++++++++++++++++++++++++++++++interface+++++++++++++++++++++++++++++++++++++
 //name:推送参数设置信息到模块
 //fun:address,baudrate,callback
-//in:   in_solid_number -- 实列号
-//       参数指针
+//in:   in_solid_number          实列号
+//       mix_pMdsRtu_parameter   参数指针
 //out:  none
 //------------------------------------------------------------------------------
 void mde_push_modbus_slave_parameter(sdt_int8u in_solid_number,mdsRtu_parameter_def* mix_pMdsRtu_parameter);
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //name:推入一字节的接收数据到链路,一般由bsp层调用
-//in:   in_solid_number    -- 实列号
-//      in_rx_byte      -- 接收的数据
+//in:   in_solid_number    实列号
+//      in_rx_byte         接收的数据
 //out:  none
 //------------------------------------------------------------------------------
 void mde_push_modbus_slave_receive_byte(sdt_int8u in_solid_number,sdt_int8u in_rx_byte);

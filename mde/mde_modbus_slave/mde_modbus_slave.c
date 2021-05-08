@@ -55,7 +55,7 @@ typedef struct
 
     
     void (*pull_look_for_byte_rx)(void);
-    void (*phy_reload)(void);
+    void (*phy_reload)(mdsRtu_phyProperty_def* in_phy_property);
     
     sdt_int16u (*transfet_bytes_tx_phy)(sdt_int8u* in_pByte,sdt_int16u in_expect_bytes);
     sdt_bool (*pull_complete_tx_data)(void);
@@ -506,7 +506,7 @@ void mde_push_modbus_slave_parameter(sdt_int8u in_solid_number,mdsRtu_parameter_
         
         if(phy_reload_once)//重载PHY
         {
-            mdsRtu_oper_solid[in_solid_number].phy_reload();
+            mdsRtu_oper_solid[in_solid_number].phy_reload(&mdsRtu_oper_solid[in_solid_number].mdsRtu_parameter.mdsRtu_phyProperty);
         }
     }
     else

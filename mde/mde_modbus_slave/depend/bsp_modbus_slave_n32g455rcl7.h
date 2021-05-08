@@ -219,8 +219,28 @@ void bsp_entry_phy_tx_phy0(void)
     macro_trs_transmit
 }
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-void bsp_phy_reload_phy0(void)
+void bsp_phy_reload_phy0(mdsRtu_phyProperty_def* in_phy_property)
 {
+    USART_InitType   USART5_INIT;
+    NVIC_InitType    USART5_NVIC_INIT;
+    
+    USART5_INIT.BaudRate = in_phy_property->mdsRtu_baudrate;
+    USART5_INIT.Parity=USART_PE_NO;
+    USART5_INIT.WordLength=USART_WL_8B;
+    USART5_INIT.StopBits=USART_STPB_1;
+    USART5_INIT.HardwareFlowControl=USART_HFCTRL_NONE;
+    USART5_INIT.Mode=(USART_MODE_RX+USART_MODE_TX);  //收发使能
+//-----------------------------------------------------------------------------
+    USART_Init(UART5,&USART5_INIT);
+    USART_ConfigInt(UART5,USART_INT_RXDNE,ENABLE);           //使能接收中断
+    USART_Enable(UART5,ENABLE);
+//-----------------------------------------------------------------------------
+    USART5_NVIC_INIT.NVIC_IRQChannel=UART5_IRQn;
+    USART5_NVIC_INIT.NVIC_IRQChannelPreemptionPriority=0;  //主优先级
+    USART5_NVIC_INIT.NVIC_IRQChannelSubPriority=0;         //子优先级
+    USART5_NVIC_INIT.NVIC_IRQChannelCmd=ENABLE;
+    NVIC_Init(&USART5_NVIC_INIT);
+    
 }
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 sdt_int16u bsp_pull_us_tick(void)
