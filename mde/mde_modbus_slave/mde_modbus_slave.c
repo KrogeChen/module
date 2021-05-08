@@ -94,7 +94,7 @@ static sdt_bool modbus_slave_protocol(mdsRtu_oper_def* mix_pMdsRtu_oper)
         if((crc_value[1] == mix_pMdsRtu_oper->rx_buff[rd_length-2]) && (crc_value[0] == mix_pMdsRtu_oper->rx_buff[rd_length-1]))//crc
         {
             
-            if(0x03 == mix_pMdsRtu_oper->rx_buff[1])
+            if((0x03 == mix_pMdsRtu_oper->rx_buff[1]) || (0x04 == mix_pMdsRtu_oper->rx_buff[1]))
             {
                 if(rd_length < 8)
                 {
@@ -107,7 +107,7 @@ static sdt_bool modbus_slave_protocol(mdsRtu_oper_def* mix_pMdsRtu_oper)
                     if(rx_readReg_len > max_reg_len)
                     {//长度错误,应答
                         mix_pMdsRtu_oper->tx_buff[0] = mix_pMdsRtu_oper->mdsRtu_parameter.mdsRtu_address;
-                        mix_pMdsRtu_oper->tx_buff[1] = 0x83;
+                        mix_pMdsRtu_oper->tx_buff[1] = 0x80 + mix_pMdsRtu_oper->rx_buff[1];
                         mix_pMdsRtu_oper->tx_buff[2] = 2;
                         mix_pMdsRtu_oper->tx_buff[3] = 0;
                         mix_pMdsRtu_oper->tx_buff[4] = 0;
@@ -117,7 +117,7 @@ static sdt_bool modbus_slave_protocol(mdsRtu_oper_def* mix_pMdsRtu_oper)
                     else if(mix_pMdsRtu_oper->mdsRtu_parameter.cbk_read_modbus_slave_register(rx_readReg_addr,rx_readReg_len,&mix_pMdsRtu_oper->reg_details[0]))
                     {//读取完成,组帧应答
                         mix_pMdsRtu_oper->tx_buff[0] = mix_pMdsRtu_oper->mdsRtu_parameter.mdsRtu_address;
-                        mix_pMdsRtu_oper->tx_buff[1] = 0x03;
+                        mix_pMdsRtu_oper->tx_buff[1] = mix_pMdsRtu_oper->rx_buff[1];
                         mix_pMdsRtu_oper->tx_buff[2] = rx_readReg_len * 2;//byte count
                         for(i = 0;i < rx_readReg_len;i++)
                         {
@@ -128,7 +128,7 @@ static sdt_bool modbus_slave_protocol(mdsRtu_oper_def* mix_pMdsRtu_oper)
                     else
                     {//读取发生错误,应答
                         mix_pMdsRtu_oper->tx_buff[0] = mix_pMdsRtu_oper->mdsRtu_parameter.mdsRtu_address;
-                        mix_pMdsRtu_oper->tx_buff[1] = 0x83;
+                        mix_pMdsRtu_oper->tx_buff[1] = 0x80 + mix_pMdsRtu_oper->rx_buff[1];
                         mix_pMdsRtu_oper->tx_buff[2] = 2;
                         mix_pMdsRtu_oper->tx_buff[3] = 0;
                         mix_pMdsRtu_oper->tx_buff[4] = 0;
