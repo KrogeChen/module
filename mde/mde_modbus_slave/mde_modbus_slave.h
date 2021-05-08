@@ -67,7 +67,6 @@ void mde_push_modbus_slave_parameter(sdt_int8u in_solid_number,mdsRtu_parameter_
 //out:  none
 //------------------------------------------------------------------------------
 void mde_push_modbus_slave_receive_byte(sdt_int8u in_solid_number,sdt_int8u in_rx_byte);
-
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 #endif

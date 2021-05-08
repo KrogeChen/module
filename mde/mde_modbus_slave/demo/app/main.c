@@ -3,6 +3,16 @@
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 void app_general_task(void)
 {
+    mde_log_message_task();
+    
+    macro_createTimer(timer_logtx,timerType_millisecond,0);
+    
+    pbc_timerClockRun_task(&timer_logtx);
+    if(pbc_pull_timerIsCompleted(&timer_logtx))
+    {
+        pbc_reload_timerClock(&timer_logtx,2000);
+        mde_push_log_character_once("LOG MESSAGE DEMO");
+    } 
 }
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 sdt_int16u demo_wreg[10];
