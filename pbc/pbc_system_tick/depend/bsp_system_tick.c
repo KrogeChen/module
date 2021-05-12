@@ -12,6 +12,8 @@
 #include ".\bsp_system_tick_hc32l176kata.h"
 #elif defined(n32g455rcl7)
 #include ".\bsp_system_tick_n32g455rcl7.h"
+#elif defined(fm33lc025n)
+#include ".\bsp_system_tick_fm33lc025n.h"
 
 #endif
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
