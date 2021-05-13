@@ -1982,6 +1982,9 @@
       <file>
         <name>$PROJ_DIR$\lib_fm33lc0x\FM33LC0xx_FL_Driver\Src\fm33lc0xx_fl_gpio.c</name>
       </file>
+      <file>
+        <name>$PROJ_DIR$\lib_fm33lc0x\FM33LC0xx_FL_Driver\Src\fm33lc0xx_fl_rcc.c</name>
+      </file>
     </group>
     <group>
       <name>pbc_system_tick</name>
