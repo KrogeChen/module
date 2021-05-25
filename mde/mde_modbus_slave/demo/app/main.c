@@ -3,6 +3,7 @@
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 void app_general_task(void)
 {
+  
     mde_log_message_task();
     
     macro_createTimer(timer_logtx,timerType_millisecond,0);
@@ -11,11 +12,12 @@ void app_general_task(void)
     if(pbc_pull_timerIsCompleted(&timer_logtx))
     {
         pbc_reload_timerClock(&timer_logtx,2000);
-        mde_push_log_character_once("LOG MESSAGE DEMO");
+        //mde_push_log_character_once("LOG MESSAGE DEMO");
     } 
+  
 }
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-sdt_int16u demo_wreg[10];
+sdt_int16u demo_wreg[256];
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //name:读寄存器数据,mde_modbus_slave 回调函数
 //fun:
@@ -124,7 +126,7 @@ void app_modbus_slave_demo_task(void)
         mdsRtu_parameter_def cfg_mdsRtu_parameter;
         
         cfg_mdsRtu_parameter.mdsRtu_address = 1;
-        cfg_mdsRtu_parameter.mdsRtu_phyProperty.mdsRtu_baudrate = 19200;
+        cfg_mdsRtu_parameter.mdsRtu_phyProperty.mdsRtu_baudrate = 9600;
         cfg_mdsRtu_parameter.mdsRtu_phyProperty.mdsRtu_sysFrequency = 72000000; //系统频率，用于bsp的波特率计算
         cfg_mdsRtu_parameter.mdsRtu_phyProperty.mdsRtu_parity = mdsRtu_parity_none;
         cfg_mdsRtu_parameter.mdsRtu_phyProperty.mdsRtu_stopBits = mdsRtu_stopBits_one;
